@@ -34,6 +34,19 @@ async function getImage(id) {
 }
 exports.getImage = getImage
 
+async function deleteImage(id) {
+  let query = `
+  DELETE 
+  FROM images
+  WHERE id = ?
+  `
+
+  const [rows] = await pool.query(query, [id]);
+  const result = rows[0];
+  return result
+}
+exports.deleteImage = deleteImage
+
 async function addImage(filePath, description) {
   let query = `
   INSERT INTO images (file_path, description)
